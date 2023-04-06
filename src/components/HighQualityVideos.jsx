@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
+import Aos from 'aos';
+import 'aos/dist/aos.css';
+
 import Image from 'next/image';
 
-import { AnimatePresence, motion } from 'framer-motion';
 import placeholder500x300 from '../../public/placeholder-500x300.png';
 
 const picsList = [
@@ -11,6 +13,7 @@ const picsList = [
     class: 'mt-0',
     text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis,laudantium!',
     img: placeholder500x300,
+    aosAnimation: 'fade-right',
   },
   {
     id: 2,
@@ -18,6 +21,7 @@ const picsList = [
     class: 'mt-20 max-md:mt-0',
     text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis,laudantium!',
     img: placeholder500x300,
+    aosAnimation: 'fade-left',
   },
   {
     id: 3,
@@ -25,6 +29,7 @@ const picsList = [
     class: 'mt-0',
     text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis,laudantium!',
     img: placeholder500x300,
+    aosAnimation: 'fade-right',
   },
   {
     id: 4,
@@ -32,12 +37,14 @@ const picsList = [
     class: 'mt-20 max-md:mt-0',
     text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis,laudantium!',
     img: placeholder500x300,
+    aosAnimation: 'fade-left',
   },
 ];
 
 const HighQualityVideos = () => {
-  const [selectedId, setSelectedId] = useState(null);
-
+  useEffect(() => {
+    Aos.init({ duration: 2000 });
+  });
   return (
     <section className="mt-20">
       <h3 className="pl-8 text-4xl font-semibold max-md:pl-0 max-md:text-3xl">
@@ -52,6 +59,7 @@ const HighQualityVideos = () => {
           <div
             key={e.id}
             className={`mx-auto flex flex-col gap-4 ${e.class}`}
+            data-aos={`${e.aosAnimation}`} //animation AOS
           >
             <Image
               src={e.img}
@@ -60,6 +68,7 @@ const HighQualityVideos = () => {
               height={300}
               className="rounded-xl"
             />
+            
             <h3 className="text-left font-bold">{e.title}</h3>
             <p className="text-slate-400">{e.text}</p>
           </div>

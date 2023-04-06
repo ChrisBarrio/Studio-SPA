@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import Aos from 'aos';
+import 'aos/dist/aos.css';
 import BtnPrimary from './BtnPrimary';
 
 const listPlans = [
@@ -16,7 +18,7 @@ const listPlans = [
   {
     name: 'Extended',
     price: '$189',
-    class:'shadow-violet-800 shadow-lg border-2 border-violet-800 ',
+    class: 'shadow-violet-800 shadow-lg border-2 border-violet-800 ',
     note: 'Great for multi-devices setups & small teams.',
     characteristics: [
       '3 macOS device',
@@ -39,8 +41,11 @@ const listPlans = [
 ];
 
 const PayOnce = () => {
+  useEffect(() => {
+    Aos.init({ duration: 2000 });
+  });
   return (
-    <section className="mt-20" id='pricing'>
+    <section className="mt-20" id="pricing">
       <h3 className="text-center text-4xl font-semibold">
         Pay once, use forever
       </h3>
@@ -53,13 +58,14 @@ const PayOnce = () => {
           <div
             key={e.name}
             className={`flex flex-col gap-4 rounded-lg bg-slate-800 bg-opacity-50 p-8 ${e.class}`}
+            data-aos="fade-up"
           >
             <p className="text-2xl font-bold">{e.name}</p>
             <p className="text-5xl font-bold">{e.price}</p>
             <p className="text-slate-400">{e.note}</p>
-            <ul className="flex flex-col gap-4 my-auto">
+            <ul className="my-auto flex flex-col gap-4">
               {e.characteristics.map((e, index) => (
-                <li key={index} className='flex'>
+                <li key={index} className="flex">
                   <svg
                     width="24"
                     height="24"
@@ -78,7 +84,7 @@ const PayOnce = () => {
                 </li>
               ))}
             </ul>
-            <BtnPrimary title='Get Started' styles='text-2xl py-3'/>
+            <BtnPrimary title="Get Started" styles="text-2xl py-3" />
           </div>
         ))}
       </div>
